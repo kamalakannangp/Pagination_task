@@ -4,22 +4,22 @@
             Pagination task
         </title>
         <style>
-            body {
-	background-color: #185ef3;
-            }
+             body {
+	          background-color: #185df346;
+             }    
             .mainDiv{
                 padding: 0px 30px;
             }
             .pagination a {
-                color: rgb(25, 106, 212);
+                color: rgb(10, 10, 10);
                 padding: 8px 16px;
                 text-decoration: none;
-                border: 1px solid #ddd;
+                border: 1px solid rgb(16, 245, 8);
             }
             .pagination a.active {
-                background-color: rgb(25, 106, 212);
-                color: white;
-                border: 1px solid rgb(25, 106, 212);
+                background-color: rgb(243, 244, 245);
+                color: rgb(17, 16, 16);
+                border: 1px solid rgb(16, 245, 8);
             }
             a.disabled {
                 pointer-events: none;
@@ -32,15 +32,15 @@
         <script src="data.js"></script>
         <script>
             
-            var conPerPage = 5; //Variable holding number of contents per page
-            var currPage = 1; //Variable holding the current page value
-            var firstTime = true; //Variable determining whether the page is loading for the first time
+            var conPerPage = 5; 
+            var currPage = 1;
+            var firstTime = true; 
 
-            //Functioin definition to create Pagination initially and also when user gives different value for contents per page
+            
             function createPagination(){
-                //If the page is getting loaded for the nth time(Not 1st time) and noOfPage greater than 1
+               
                 if(!firstTime && noOfPag > 1){
-                    //Removing the previous pagination items to create new pagination
+                
                     for(let i=1;i<=noOfPag;i++){
                         var element = document.getElementById('a'+i);
                         element.parentNode.removeChild(element);
@@ -51,25 +51,25 @@
                     element = document.getElementById('anext');
                     element.parentNode.removeChild(element);
 
-                    div1.innerHTML = '' // Clearing the contents already displayed
-                    currPage = 1; // Setting current page to 1
+                    div1.innerHTML = '' 
+                    currPage = 1; 
                     
                 }
 
-                //If the total conents not a multiple of contents per page(Ex: total contents-100 and contents per page-6) 
+ 
                 if(data.length%conPerPage){
                     noOfPag = parseInt((data.length)/conPerPage)+1;
                     console.log(typeof(noOfPag));
                     console.log(noOfPag);
                 }
-                //If the total contents is a multiple of contents per page(Ex: total contents-100 and contents per page-5) 
+                
                 else{
                     noOfPag = (data.length)/conPerPage;
                 }
                 
                 
 
-                //To create pagination only if the content doesn't fir in 1st page
+             
                 if(conPerPage < data.length){
 
                     var a1 = document.createElement('a');
@@ -88,7 +88,7 @@
                     aprev.disabled = true;
                     divPag.append(aprev);
 
-                    //Loop to create pages in pagination start from 2 to last
+                   
                     for(let i=2;i<noOfPag;i++){
                         var a2 = document.createElement('a');
                         var aid = 'a' + i;
@@ -112,12 +112,10 @@
                     alast.innerText = 'Last'
                     alast.setAttribute('onClick',"displayContents('last')")
                     divPag.append(alast);
-
-                    //Setting class of the first pagination element to active
                     a1.setAttribute('class','active')
                 }
 
-                //Displaying first n contents by default(to display from 1 to 5 in default 5 contents per page mode)
+               
                 for(let i = (currPage-1)*conPerPage ; i<currPage*conPerPage ; i++){
                                 div1.innerHTML += "<div><b>ID:</b> " + data[i].id + "</div><div><b>Name:</b>" + data[i].name + "</div><div><b>Email:</b>" + data[i].email + "</div><br>"
                                 if( i+1 === data.length)
@@ -126,52 +124,52 @@
             }
 
             function displayContents(pg){
-                //To change the style of current page to not active state
+
                 document.getElementById('a'+currPage).setAttribute('class','')
-                div1.innerHTML = '' // Clearing the contents already displayed
-                if(pg === 'prev'){ //If clicked on the prev page option
+                div1.innerHTML = '' 
+                if(pg === 'prev'){
                     currPage--;
                 }
                 else{
-                    if(pg === 'next'){ //If clicked on the next page option
+                    if(pg === 'next'){ 
                         currPage++;
                     }
                     else{ 
-                        if(pg === 'last'){ //If clicked on the last page option
+                        if(pg === 'last'){ 
                             currPage = noOfPag;
                         }
-                        else{ //If clicked on the any numeric page option
+                        else{ 
                             currPage = parseInt(pg);
                         }
                     }
                 }
-                //Displaying elements as per the user clicked option(to display from 11 to 15 if selected 3 in default mode)
+              
                 for(let i = (currPage-1)*conPerPage ; i<currPage*conPerPage ; i++){
                                 div1.innerHTML += "<div><b>ID:</b> " + data[i].id + "</div><div><b>Name:</b> " + data[i].name + "</div><div><b>Email:</b> " + data[i].email + "</div><br>"
                                 if( i+1 === data.length)
                                     break;
                 }
-                //Setting class of the current pagination element to active
+            
                 document.getElementById('a'+currPage).setAttribute('class','active')
-                if(currPage === 1) // To disable the prev button when current page is 1
-                    //console.log(document.getElementById('aprev'));
+                if(currPage === 1) 
+                    
                     document.getElementById('aprev').setAttribute('class','disabled');
-                    //To disable next and also last page buttons in case all the data fits in first page
+                   
                 else{
-                    // To enable the prev button when current page is not 1
+                    
                     document.getElementById('aprev').setAttribute('class','');
                     if(currPage === noOfPag){
-                        // To disable the next button when current page is last page
+                    
                         document.getElementById('anext').setAttribute('class','disabled');
                     }
                     else
-                        // To enable the next button when current page is not last page
+               
                         document.getElementById('anext').setAttribute('class','');
                 }
                     
             }
 
-            //Funtion to change no.of pages in pagination as per user request
+          
             function changePagination(){
                 firstTime = false;
                 conPerPage = document.getElementById('inputVal').value;
@@ -204,7 +202,7 @@
             label1.innerText = 'Change no.of contents per page to '
             label1.style.paddingLeft = '16px'
 
-            //input Contents per page text field
+
             var inConPerPage = document.createElement('input');
             inConPerPage.setAttribute('type','number');
             inConPerPage.setAttribute('id','inputVal');
